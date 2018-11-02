@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 
 import { ImageService } from './services/image.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

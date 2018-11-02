@@ -13,13 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {
-    this.getImageLen();
-  }
-
-  getImageLen() {
-    this.imageService.getImagesLength().subscribe(data => {
-      console.log(data);
-    });
   }
 
 }

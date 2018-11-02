@@ -28,6 +28,18 @@ const upload = multer({
     dest: "TempImagesFromRpi"
 });
 
+var url = "mongodb://admin:admin69@ds131743.mlab.com:31743/micro";
+mongoose.connect(url, {useNewUrlParser: true});
+var conn = mongoose.connection;
+conn.on('error', () => {
+	console.log("Error Connecting to mlab");
+});
+conn.on('open', () => {
+	console.log("Connetion established to mlab");
+});
+
+
+
 
 
 
@@ -64,6 +76,7 @@ app.post("/imagelen", (req, res) => {
 
 app.post("/image", upload.single("file"), (req, res) => {
     console.log(req.file);
+    console.log(req.body);
     const tempPath = req.file.path;
 
     fs.readdir(path.join(__dirname, "/IMAGESFROMRPI"), (err, files) => {
