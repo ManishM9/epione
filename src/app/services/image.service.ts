@@ -17,5 +17,16 @@ export class ImageService {
     return this.http.post<any>("imagelen", { sendlen: true }, httpOptions);
   }
 
+  login(obj: any): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<any>("login", { username: obj.username, password: obj.password }, httpOptions);
+  }
+
+  getLogin(): Observable<any>{
+    return this.http.get<any>("getlogin");
+  }
+
 
 }

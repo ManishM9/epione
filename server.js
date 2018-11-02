@@ -8,6 +8,8 @@ var mongoose = require("mongoose");
 // var nodemailer = require("nodemailer");
 var fs = require("fs");
 var multer = require("multer");
+// const ngUniversal = require('@nguniversal/express-engine');
+// const appServer = require('/dist');
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -23,6 +25,8 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'dist/epione')));
 app.use('/glint', express.static(path.join(__dirname, 'glint')));
+app.use('/Login_v8', express.static(path.join(__dirname, 'Login_v8')));
+app.use(express.static(path.join(__dirname, 'IMAGESFROMRPI')));
 
 const upload = multer({
     dest: "TempImagesFromRpi"
@@ -38,14 +42,23 @@ conn.on('open', () => {
 	console.log("Connetion established to mlab");
 });
 
-
-
-
-
-
-app.get("/test", (req, res) => {
-    res.send("Yo");
+var loginSchema = new mongoose.Schema({
+    username: String,
+    password: String,
 });
+
+var Login = mongoose.model("login", loginSchema);
+
+// Login.create({ username: "epione", password: "epione" }, (err, login) => {
+//     if(err){
+//         console.log(err);
+//         throw err;
+//     } else {
+//         console.log(login);
+//     }
+// })
+
+
 
 
 // function getImageName() {
@@ -136,7 +149,66 @@ app.post("/image", upload.single("file"), (req, res) => {
 // });
 
 
+app.post("/login", (req, res) => {
+    var reqb = req.body;
+    console.log(reqb);
+    var username = reqb.username;
+    var password = reqb.password;
+    Login.find({ username: username, password: password }, (err, login) => {
+        if(err){
+            console.log(err);
+            res.send(false);
+            throw err;
+        } else {
+            console.log(login);
+            login = login[0];
+            if(login !== {} && login !== undefined && login !== null){
+                req.session.username = username;
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        }
+    });
+});
 
+
+
+// function angularRouter(req, res) {
+
+//   /* Server-side rendering */
+//   res.render('index', { req, res });
+
+// }
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname,"dist/epione/index.html"));
+});
+
+app.get("/", (req, res)=> {
+    if(req.session.username != undefined){
+        res.sendFile(path.join(__dirname,"dist/epione/index.html"));
+    } else {
+        res.redirect("/login");
+    }
+});
+
+app.get("/getlogin", (req, res) => {
+    if(req.session.username !== undefined){
+        res.send(true);
+    } else {
+        res.send(false);
+    }
+})
+
+// app.engine('html', ngUniversal.ngExpressEngine({
+//   bootstrap: appServer.AppServerModuleNgFactory
+// }));
+// app.set('view engine', 'html');
+// app.set('views', 'dist');
+
+// /* Direct all routes to index.html, where Angular will take care of routing */
+// app.get('*', angularRouter);
 
 
 app.listen(process.env.PORT || 8888, process.env.IP, () => {
