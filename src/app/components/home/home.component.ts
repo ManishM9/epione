@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   getfit() {
     this.imageService.getfit().subscribe(data => {
+      console.log(data);
       if(!data){
         this.avgsteps = data.avgsteps;
         this.avgbpm = data.avgbpm;
