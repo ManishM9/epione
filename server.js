@@ -194,6 +194,7 @@ app.post("/login", (req, res) => {
 
 app.post("/uploadfit", (req, res) => {
     var reqb = req.body;
+    console.log(reqb);
     var obj_toadd = {
         locator: 1,
         avgsteps: reqb.avgsteps,
