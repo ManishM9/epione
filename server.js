@@ -49,6 +49,12 @@ var loginSchema = new mongoose.Schema({
 
 var Login = mongoose.model("login", loginSchema);
 
+var valuesSchema = new mongoose.Schema({
+    
+});
+
+var Values = mongoose.model("values", valuesSchema);
+
 // Login.create({ username: "epione", password: "epione" }, (err, login) => {
 //     if(err){
 //         console.log(err);
