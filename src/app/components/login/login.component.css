@@ -5,21 +5,21 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-@font-face {
-    font-family: Ubuntu-Regular;
+/* @font-face { */
+    /* font-family: Ubuntu-Regular; */
 	/* src: url('../../fonts/ubuntu/Ubuntu-Regular.ttf');  */
-	src: url('../../../../Login_v8/fonts/ubuntu/Ubuntu-Regular.ttf');
-  }
+	/* src: url('../../../../Login_v8/fonts/ubuntu/Ubuntu-Regular.ttf'); */
+  /* } */
   
-  @font-face {
-    font-family: Ubuntu-Bold;
-    src: url('../../../../Login_v8/fonts/ubuntu/Ubuntu-Bold.ttf'); 
-  }
+  /* @font-face { */
+    /* font-family: Ubuntu-Bold; */
+    /* src: url('../../../../Login_v8/fonts/ubuntu/Ubuntu-Bold.ttf');  */
+  /* } */
   
-  @font-face {
-    font-family: JosefinSans-Bold;
-    src: url('../../../../Login_v8/fonts/JosefinSans/JosefinSans-Bold.ttf'); 
-  }
+  /* @font-face { */
+    /* font-family: JosefinSans-Bold; */
+    /* src: url('../../../../Login_v8/fonts/JosefinSans/JosefinSans-Bold.ttf');  */
+  /* } */
   
   
   
