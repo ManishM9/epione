@@ -197,11 +197,12 @@ app.post("/uploadfit", (req, res) => {
     console.log(reqb);
     var obj_toadd = {
         locator: 1,
-        avgsteps: reqb.avgsteps,
-        avgbpm: reqb.avgbpm,
-        breathrate: reqb.breathrate,
-        fit: reqb.fit
+        avgsteps: Number(reqb.avgsteps),
+        avgbpm: Number(reqb.avgbpm),
+        breathrate: Number(reqb.breathrate),
+        fit: Number(reqb.fit)
     };
+    console.log(obj_toadd);
     Values.deleteMany({}, (err, info)=> {
         if(err){
             console.log(err);
