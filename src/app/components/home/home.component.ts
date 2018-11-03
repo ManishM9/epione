@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
       }
     });
     this.getImageLen();
+    this.getfit();
   }
 
   getImageLen() {
