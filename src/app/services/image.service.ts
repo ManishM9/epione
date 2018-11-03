@@ -28,5 +28,9 @@ export class ImageService {
     return this.http.get<any>("getlogin");
   }
 
+  getfit(): Observable<any>{
+    return this.http.get<any>("getfit")
+  }
+
 
 }

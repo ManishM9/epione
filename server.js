@@ -50,10 +50,23 @@ var loginSchema = new mongoose.Schema({
 var Login = mongoose.model("login", loginSchema);
 
 var valuesSchema = new mongoose.Schema({
-    
+    locator: Number,
+    avgsteps: Number,
+    avgbpm: Number,
+    breathrate: Number,
+    fit: Number
 });
 
 var Values = mongoose.model("values", valuesSchema);
+
+// Values.create({ locator: 1, avgsteps: 2535, avgbpm: 73, breathrate: 40, fit: 61 }, (err, value) => {
+//     if(err){
+//         console.log(err);
+//         throw err;
+//     } else {
+//         console.log(value);
+//     }
+// });
 
 // Login.create({ username: "epione", password: "epione" }, (err, login) => {
 //     if(err){
@@ -179,6 +192,49 @@ app.post("/login", (req, res) => {
 });
 
 
+app.post("/uploadfit", (req, res) => {
+    var reqb = req.body;
+    var obj_toadd = {
+        locator: 1,
+        avgsteps: reqb.avgsteps,
+        avgbpm: reqb.avgbpm,
+        breathrate: reqb.breathrate,
+        fit: reqb.fit
+    };
+    Values.deleteMany({}, (err, info)=> {
+        if(err){
+            console.log(err);
+            throw err;
+        } else {
+            Values.create({obj_toadd}, (err2, value) => {
+                if(err2){
+                    console.log(err2);
+                    res.send("Fail");
+                    throw err2;
+                } else {
+                    console.log(value);
+                    res.send("Success");
+                }
+            });
+        }
+    });
+});
+
+app.get("/getfit", (req, res) => {
+    if(req.session.username !== null && req.session.username !== undefined){
+        Values.find({ locator:1 }, (err, value) => {
+            if(err){
+                console.log(err);
+                res.send(false);
+                throw err;
+            } else {
+                value = value[0];
+                console.log(value);
+                res.send({ avgsteps: value.avgsteps, avgbpm: value.avgbpm, breathrate: value.breathrate, fit: value.fit });
+            }
+        });
+    }
+});
 
 // function angularRouter(req, res) {
 
