@@ -203,12 +203,12 @@ app.post("/uploadfit", (req, res) => {
         fit: Number(reqb.fit)
     };
     console.log(obj_toadd);
-    Values.deleteMany({}, (err, info)=> {
+    Values.deleteOne({}, (err, info)=> {
         if(err){
             console.log(err);
             throw err;
         } else {
-            Values.create({obj_toadd}, (err2, value) => {
+            Values.create(obj_toadd, (err2, value) => {
                 if(err2){
                     console.log(err2);
                     res.send("Fail");
